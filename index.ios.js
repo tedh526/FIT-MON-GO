@@ -3,19 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-
-export default class FitMonGo extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
+      {/*<View style={styles.container}>
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
@@ -26,12 +14,59 @@ export default class FitMonGo extends Component {
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
-      </View>
+      </View>*/}
+
+//setInterval
+// while(this.state.health > 0) {
+//   this.state.health -= 1;
+//   setTimeout(15000);
+// }
+
+
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
+import HealthMeter from './components/healthmeter.js';
+
+export default class FitMonGo extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      health: 100
+    };
+  }
+
+  onLoad() {
+    this.setState({
+      health: this.state.health - 1
+    });
+    console.log(this.state.health);
+  }
+
+  componentDidMount() {
+    // while (this.state.health > 0) {
+    //   // console.log('hello');
+    //   console.log(this.state.health);
+    //   // this.onLoad();
+    //   setTimeout(15000);
+    // }
+    console.log('hello');
+    this.onLoad();
+  }
+
+
+  render() {
+    return (
+      <HealthMeter health={this.state.health}/>
     );
   }
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
