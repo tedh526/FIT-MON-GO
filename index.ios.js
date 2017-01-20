@@ -16,12 +16,14 @@
         </Text>
       </View>*/}
 
-//setInterval
-// while(this.state.health > 0) {
-//   this.state.health -= 1;
-//   setTimeout(15000);
-// }
+//-----------------------------------------------------------------------------//
 
+// need to get gps working so we can increase health based on walking
+// 
+// need to get google maps integration
+
+
+//-----------------------------------------------------------------------------//
 
 import React, { Component } from 'react';
 import {
@@ -30,12 +32,14 @@ import {
   Text,
   View
 } from 'react-native';
+import Avatar from './components/avatar.js';
 import HealthMeter from './components/healthmeter.js';
 
 export default class FitMonGo extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      avatarPic: 100,
       health: 100,
       alive: true
     };
@@ -50,18 +54,31 @@ export default class FitMonGo extends Component {
     let healthDecrease = function() {
       let health = this.state.health - 1;
       this.setState({health});
-      if (health === 0) {
-        this.setState({alive: false});
+      if (health > 80) {
+        this.setState({avatarPic: 100});
+      } else if (health > 60) {
+        this.setState({avatarPic: 80});
+      } else if (health > 40) {
+        this.setState({avatarPic: 60});
+      } else if (health > 20) {
+        this.setState({avatarPic: 40});
+      } else if (health > 0) {
+        this.setState({avatarPic: 20});
+      } else {
+        this.setState({avatarPic: 0, alive: false});
         return console.log('dead');
       }
-      return setTimeout(healthDecrease.bind(this), 5000);
+      return setTimeout(healthDecrease.bind(this), 200);
     };
-    setTimeout(healthDecrease.bind(this), 5000);
+    setTimeout(healthDecrease.bind(this), 200);
   }
 
   render() {
     return (
-      <HealthMeter health={this.state.health}/>
+      <View style={styles.container}>
+        <Avatar avatar={this.state.avatarPic}/>
+        <HealthMeter health={this.state.health} alive={this.state.alive}/>
+      </View>
     );
   }
 }
