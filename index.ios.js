@@ -51,7 +51,7 @@ export default class FitMonGo extends Component {
     super(props);
     this.state = {
       avatarPic: 100,
-      health: 50,
+      health: 100,
       alive: true,
       totalDistance: 0,
       lastPosition: 'unknown',
@@ -89,9 +89,9 @@ export default class FitMonGo extends Component {
         this.setState({avatarPic: 0, alive: false});
         return console.log('dead');
       }
-      return setTimeout(healthDecrease.bind(this), 60000);
+      return setTimeout(healthDecrease.bind(this), 200);
     };
-    setTimeout(healthDecrease.bind(this), 60000);
+    setTimeout(healthDecrease.bind(this), 200);
   }
 
   distanceTravel(position){
