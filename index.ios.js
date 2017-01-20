@@ -36,30 +36,28 @@ export default class FitMonGo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      health: 100
+      health: 100,
+      alive: true
     };
   }
 
-  onLoad() {
-    while (this.state.health > 0) {
-      this.setState({
-        health: this.state.health - 1
-      });
-      console.log(this.state.health);
-      setTimeout(15000);
-    }
-  }
 
   componentDidMount() {
-    // while (this.state.health > 0) {
-    //   // console.log('hello');
-    //   console.log(this.state.health);
-    //   // this.onLoad();
-    //   setTimeout(15000);
-    // }
-    // this.onLoad();
+    this.healthCountdown();
   }
 
+  healthCountdown() {
+    let healthDecrease = function() {
+      let health = this.state.health - 1;
+      this.setState({health});
+      if (health === 0) {
+        this.setState({alive: false});
+        return console.log('dead');
+      }
+      return setTimeout(healthDecrease.bind(this), 5000);
+    };
+    setTimeout(healthDecrease.bind(this), 5000);
+  }
 
   render() {
     return (
