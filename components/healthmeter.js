@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
-  StyleSheet,
   Text,
   View
 } from 'react-native';
 import {styles} from '../index.ios.js';
 
 export default HealthMeter = (props) => {
+    let restart;
+
 
     // navigator.geolocation.getCurrentPosition((geolocation) => console.log('this is geolocation', geolocation));
     return (
