@@ -41,10 +41,13 @@ export default class FitMonGo extends Component {
   }
 
   onLoad() {
-    this.setState({
-      health: this.state.health - 1
-    });
-    console.log(this.state.health);
+    while (this.state.health > 0) {
+      this.setState({
+        health: this.state.health - 1
+      });
+      console.log(this.state.health);
+      setTimeout(15000);
+    }
   }
 
   componentDidMount() {
@@ -54,8 +57,7 @@ export default class FitMonGo extends Component {
     //   // this.onLoad();
     //   setTimeout(15000);
     // }
-    console.log('hello');
-    this.onLoad();
+    // this.onLoad();
   }
 
 
