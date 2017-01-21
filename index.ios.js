@@ -34,6 +34,7 @@ import {
 } from 'react-native';
 import Avatar from './components/avatar.js';
 import HealthMeter from './components/healthmeter.js';
+import MapView from 'react-native-maps';
 
 let defaultLast = { coords:
      { speed: -1,
@@ -56,6 +57,12 @@ export default class FitMonGo extends Component {
       totalDistance: 0,
       lastPosition: 'unknown',
       healthGained: 0,
+      region: {
+        latitude: 37.78825,
+        longitude: -122.4324,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      },
     };
   }
 
@@ -119,8 +126,7 @@ export default class FitMonGo extends Component {
 
     this.setState({lastPosition: position})
 
-    //increase the health
-    
+    //increase the health 
   }
 
   distance(lat1, lon1, lat2, lon2) {
@@ -135,9 +141,21 @@ export default class FitMonGo extends Component {
     return dist
   }
 
+  onRegionChange(region) {
+    this.setState({region});
+  }
+
   render() {
     return (
       <View style={styles.container}>
+        <MapView style={{height:200, width:200}}
+            initialRegion={{
+              latitude: 37.78825,
+              longitude: -122.4324,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+        />
         <Avatar avatar={this.state.avatarPic}/>
         <HealthMeter health={this.state.health} alive={this.state.alive}/>
         <Text style={styles.welcome}> Health Gained: {this.state.healthGained} </Text>
