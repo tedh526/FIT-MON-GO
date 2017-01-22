@@ -33,6 +33,16 @@
 
 
 //-----------------------------------------------------------------------------//
+// let defaultLast = { coords:
+//      { speed: -1,
+//        longitude: -122.426417,
+//        latitude: 37.785834,
+//        accuracy: 5,
+//        heading: -1,
+//        altitude: 0,
+//        altitudeAccuracy: -1 },
+//     timestamp: 1484942236017.157 }
+
 
 import React, { Component } from 'react';
 import {
@@ -43,18 +53,7 @@ import {
 } from 'react-native';
 import Avatar from './components/avatar.js';
 import HealthMeter from './components/healthmeter.js';
-import MapView from 'react-native-maps';
 import Maps from './components/maps.js';
-
-let defaultLast = { coords:
-     { speed: -1,
-       longitude: -122.426417,
-       latitude: 37.785834,
-       accuracy: 5,
-       heading: -1,
-       altitude: 0,
-       altitudeAccuracy: -1 },
-    timestamp: 1484942236017.157 }
 
 
 export default class FitMonGo extends Component {
@@ -76,13 +75,12 @@ export default class FitMonGo extends Component {
 
   componentDidMount() {
     this.healthCountdown();
-    navigator.geolocation.watchPosition.bind(this)
+    navigator.geolocation.watchPosition.bind(this);
     navigator.geolocation.watchPosition(
       position => this.distanceTravel(position),
       error => alert(JSON.stringify(error)),
       {enableHighAccuracy: true, timeout: 20000}
-    )
-    //.bind(this)
+    );
   }
 
   healthCountdown() {
@@ -154,10 +152,21 @@ export default class FitMonGo extends Component {
 
   render() {
     return (
-        <Avatar avatar={this.state.avatarPic}/>
+      <Maps position={this.state.lastPosition}/>
     );
   }
 }
+
+
+{/*<View style={styles.container}>
+        <Avatar avatar={this.state.avatarPic}/>
+        <HealthMeter health={this.state.health} alive={this.state.alive}/>
+        <Text style={styles.welcome}> Health Gained: {this.state.healthGained} </Text>
+        <Text style={styles.welcome}> Total Distance: {this.state.totalDistance} </Text>
+      </View>*/}
+
+{/*<Maps position={this.state.lastPosition}/>*/}
+
 
 export const styles = StyleSheet.create({
   container: {
@@ -179,5 +188,4 @@ export const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('FitMonGo', () => FitMonGo);
-        {/*<Maps position={this.state.lastPosition}/>*/}
 

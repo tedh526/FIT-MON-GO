@@ -24,7 +24,7 @@ export default Avatar = (props) => {
         <Text style={styles.welcome}>
           Avatar
         </Text>
-        <Image source={avatar['eating']}/>
+        <Image source={avatar[props.avatar]}/>
       </View>
     );
 };
