@@ -30,11 +30,11 @@ const styles = StyleSheet.create({
 export default class Maps extends Component {
   constructor(props) {
     super(props);
-    console.log('this is props ********', props);
+    console.log('this is props ********', props.myProp);
     this.state = {
       coordinate: new MapView.AnimatedRegion({
-        latitude: props.position.coords.latitude,
-        longitude: props.position.coords.longitude,
+        latitude: props.myProp.coords.latitude,
+        longitude: props.myProp.coords.longitude,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       }),
