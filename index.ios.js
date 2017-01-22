@@ -16,11 +16,20 @@
         </Text>
       </View>*/}
 
+
+      // region: {
+      //   latitude: 40.705255,
+      //   longitude: -74.009149,
+      //   latitudeDelta: 0.0922,
+      //   longitudeDelta: 0.0421,
+      // },
+
 //-----------------------------------------------------------------------------//
 
-// need to get gps working so we can increase health based on walking
-// 
-// need to get google maps integration
+//need to combine branches (new pictures workout/eating for minions)
+//need for choose character at welcome page
+//need to have health increase when near gym or healthy restaurant (100ft from coordinates, 0.0189394 miles)
+//need to fake data and prep for presentation
 
 
 //-----------------------------------------------------------------------------//
@@ -35,6 +44,7 @@ import {
 import Avatar from './components/avatar.js';
 import HealthMeter from './components/healthmeter.js';
 import MapView from 'react-native-maps';
+import Maps from './components/maps.js';
 
 let defaultLast = { coords:
      { speed: -1,
@@ -55,14 +65,11 @@ export default class FitMonGo extends Component {
       health: 100,
       alive: true,
       totalDistance: 0,
-      lastPosition: 'unknown',
+      lastPosition: {coords: {
+        latitude: 40.705255,
+        longitude: -74.009149,
+      }},
       healthGained: 0,
-      region: {
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      },
     };
   }
 
@@ -96,9 +103,9 @@ export default class FitMonGo extends Component {
         this.setState({avatarPic: 0, alive: false});
         return console.log('dead');
       }
-      return setTimeout(healthDecrease.bind(this), 200);
+      return setTimeout(healthDecrease.bind(this), 20000);
     };
-    setTimeout(healthDecrease.bind(this), 200);
+    setTimeout(healthDecrease.bind(this), 20000);
   }
 
   distanceTravel(position){
@@ -147,20 +154,7 @@ export default class FitMonGo extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <MapView style={{height:200, width:200}}
-            initialRegion={{
-              latitude: 37.78825,
-              longitude: -122.4324,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-        />
         <Avatar avatar={this.state.avatarPic}/>
-        <HealthMeter health={this.state.health} alive={this.state.alive}/>
-        <Text style={styles.welcome}> Health Gained: {this.state.healthGained} </Text>
-        <Text style={styles.welcome}> Total Distance: {this.state.totalDistance} </Text>
-      </View>
     );
   }
 }
@@ -185,3 +179,5 @@ export const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('FitMonGo', () => FitMonGo);
+        {/*<Maps position={this.state.lastPosition}/>*/}
+
