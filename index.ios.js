@@ -69,15 +69,44 @@ export default class FitMonGo extends Component {
         longitude: -74.009149,
       }},
       healthGained: 0,
+      avatarKey: 0,
+      goodPlaces:
+        [
+          {
+            latitude: 40.705575,
+            longitude: -74.008390,
+          },
+          {
+            latitude: 40.704544,
+            longitude: -74.008904,
+          },
+          //honolulu
+          {
+            longitude: -157.8294444,
+            latitude: 21.2827778,
+            key: 1
+          },
+          //london
+          {
+            longitude: -0.1337,
+            latitude: 51.50998,
+            key: 2
+          }
+        ],
+
     };
   }
 
 
   componentDidMount() {
     this.healthCountdown();
+    this.avatarUpdate();
+    this.powerUp();
     navigator.geolocation.watchPosition.bind(this);
     navigator.geolocation.watchPosition(
-      position => this.distanceTravel(position),
+      position => {
+        this.distanceTravel(position)
+      },
       error => alert(JSON.stringify(error)),
       {enableHighAccuracy: true, timeout: 20000}
     );
@@ -87,7 +116,22 @@ export default class FitMonGo extends Component {
     let healthDecrease = function() {
       let health = this.state.health - 1;
       this.setState({health});
-      if (health > 80) {
+      if (health < 1) {
+        return console.log('deadhealth');
+      }
+      return setTimeout(healthDecrease.bind(this), 300);
+    };
+    setTimeout(healthDecrease.bind(this), 300);
+  }
+
+  avatarUpdate() {
+    let update = function(){
+      let health = this.state.health
+      if (this.state.avatarKey === 1) {
+        this.setState({avatarPic: 'eating'});
+      } else if (this.state.avatarKey === 2){
+        this.setState({avatarPic: 'workout'});
+      } else if (health > 80) {
         this.setState({avatarPic: 100});
       } else if (health > 60) {
         this.setState({avatarPic: 80});
@@ -98,12 +142,12 @@ export default class FitMonGo extends Component {
       } else if (health > 0) {
         this.setState({avatarPic: 20});
       } else {
-        this.setState({avatarPic: 0, alive: false});
+        this.setState({avatarPic: 0, alive: false, health: 0});
         return console.log('dead');
       }
-      return setTimeout(healthDecrease.bind(this), 20000);
+      return setTimeout(update.bind(this), 1000);
     };
-    setTimeout(healthDecrease.bind(this), 20000);
+    setTimeout(update.bind(this), 1000);
   }
 
   distanceTravel(position){
@@ -146,13 +190,46 @@ export default class FitMonGo extends Component {
     return dist
   }
 
+  powerUp() {
+    let checkLocations = function () {
+    let position = this.state.lastPosition
+    console.log('aaaaaaaaaaaaa')
+      let inAGoodPlace = false
+      let avatarKey = 0
+      this.state.goodPlaces.forEach(place => {
+        let lat1 = place.latitude
+        let lon1 = place.longitude
+        let lat2 = position.coords.latitude
+        let lon2 = position.coords.longitude
+        let distanceFromPlace = this.distance(lat1, lon1, lat2, lon2)
+        if (distanceFromPlace < 0.0189){
+          inAGoodPlace = true
+          avatarKey = place.key
+        }
+      })
+      if (inAGoodPlace && this.state.alive){
+        let health = Math.min(100, this.state.health + 15)
+        this.setState({health})
+        inAGoodPlace = false
+      }
+        this.setState({avatarKey})
+      return setTimeout(checkLocations.bind(this), 5000)
+    }
+    setTimeout(checkLocations.bind(this, 5000))
+  }
+
   onRegionChange(region) {
     this.setState({region});
   }
 
   render() {
     return (
-      <Maps position={this.state.lastPosition}/>
+      <View style={styles.container}>
+        <Avatar avatar={this.state.avatarPic}/>
+        <HealthMeter health={this.state.health} alive={this.state.alive}/>
+        <Text style={styles.welcome}> Health Gained: {this.state.healthGained} </Text>
+        <Text style={styles.welcome}> Total Distance: {this.state.totalDistance} Miles </Text>
+      </View>
     );
   }
 }
