@@ -59,6 +59,7 @@ import StatsPage from './components/statspage.js';
 
 
 export default class FitMonGo extends Component {
+
   // constructor(props) {
   //   super(props);
   //   this.state = {
@@ -164,6 +165,7 @@ export default class FitMonGo extends Component {
         }}
         style={{flex: 1}}
       />
+
     );
   }
 }
