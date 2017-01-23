@@ -18,7 +18,7 @@ export default class HealthMeter extends Component{
 
   render(){
       return (
-        <View style={styles.container}>
+        <View >
           <Text style={styles.welcome}>
             Health
           </Text>

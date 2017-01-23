@@ -37,7 +37,7 @@ export default Avatar = (props) => {
 
     // navigator.geolocation.getCurrentPosition((geolocation) => console.log('this is geolocation', geolocation));
     return (
-      <View style={styles.container}>
+      <View>
         <Text style={styles.welcome}>
           FIT-MON-GO
         </Text>

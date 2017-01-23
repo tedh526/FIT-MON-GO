@@ -199,6 +199,12 @@ export default class StatsPage extends Component {
             source={require('../images/MapButton.png')}
           />
         </TouchableHighlight>
+         <TouchableHighlight onPress={() => this.setState({avatarEvol: true})}>
+          <Image 
+            style = {styles.button}
+            source = {require('../images/evolve.png')}
+          />
+        </TouchableHighlight>
       </View>
     );
   }
