@@ -3,7 +3,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  Image
 } from 'react-native';
 import Avatar from './avatar.js';
 import HealthMeter from './healthmeter.js';
@@ -189,11 +190,12 @@ export default class StatsPage extends Component {
         <Avatar avatar={this.state.avatarPic}/>
         <HealthMeter health={this.state.health} alive={this.state.alive}/>
         <Text style={styles.welcome}> Health Gained: {this.state.healthGained} </Text>
-        <Text style={styles.welcome}> Total Distance: {this.state.totalDistance} Miles</Text>
+        <Text style={styles.welcome}> Total Distance: {this.state.totalDistance.toFixed(3)} Miles</Text>
         <TouchableHighlight onPress={() => this._handleNextPress(mapRoute)}>
-          <Text style={{marginTop: 200, alignSelf: 'center'}}>
-            See you on the other nav!
-          </Text>
+          <Image
+            style = {styles.button}
+            source={require('../images/MapButton.png')}
+          />
         </TouchableHighlight>
       </View>
     );
@@ -216,7 +218,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'white',
   },
   welcome: {
     fontSize: 20,
@@ -228,4 +230,7 @@ export const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  button: {
+    margin: 50
+  }
 });

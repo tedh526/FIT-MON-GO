@@ -3,7 +3,7 @@ import {
   Text,
   View
 } from 'react-native';
-import {styles} from '../index.ios.js';
+import {styles} from './statspage.js';
 
 export default class HealthMeter extends Component{
 

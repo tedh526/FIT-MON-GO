@@ -4,7 +4,7 @@ import {
   View,
   Image
 } from 'react-native';
-import {styles} from '../index.ios.js';
+import {styles} from './statspage.js';
 
 export default Avatar = (props) => {
   let avatar = {
