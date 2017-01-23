@@ -79,9 +79,9 @@ export default class StatsPage extends Component {
       if (health < 1) {
         return console.log('deadhealth');
       }
-      return setTimeout(healthDecrease.bind(this), 300);
+      return setTimeout(healthDecrease.bind(this), 600);
     };
-    setTimeout(healthDecrease.bind(this), 300);
+    setTimeout(healthDecrease.bind(this), 600);
   }
 
   avatarUpdate() {
@@ -192,7 +192,7 @@ export default class StatsPage extends Component {
         <Avatar avatar={this.state.avatarPic} avatarEvol={this.state.avatarEvol}/>
         <HealthMeter health={this.state.health} alive={this.state.alive}/>
         <Text style={styles.walkingdata}> Health Gained By Walking: {this.state.healthGained} </Text>
-        <Text style={styles.walkingdata}> Total Distance: {this.state.totalDistance.toFixed(3)} Miles</Text>
+        <Text style={styles.walkingdistance}> Total Distance: {this.state.totalDistance.toFixed(3)} Miles</Text>
         <TouchableHighlight onPress={() => this._handleNextPress(mapRoute)}>
           <Image
             style = {styles.button}
@@ -221,14 +221,30 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
   },
+  container2: {
+    flex: 2,
+    marginTop: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
   avatarname: {
+    fontSize: 45,
+    textAlign: 'center',
+    fontFamily: 'DIN Alternate'
+  },
+  health: {
     fontSize: 35,
     textAlign: 'center',
+    marginBottom: 10,
+    fontFamily: 'Helvetica',
+    color: '#39393A'
   },
   healthmeter: {
-    fontSize: 20,
+    fontSize: 25,
     textAlign: 'center',
-    margin: 10,
+    marginBottom: 70,
+    color: '#39393A'
   },
   welcome: {
     fontSize: 20,
@@ -236,10 +252,17 @@ export const styles = StyleSheet.create({
     margin: 10,
   },
   walkingdata: {
-    fontSize: 15,
+    fontSize: 18,
     textAlign: 'left',
+    color: '#454647'
+  },
+  walkingdistance: {
+    fontSize: 18,
+    textAlign: 'left',
+    marginBottom: 20,
+    color: '#454647'
   },
   button: {
-    margin: 5
+    margin: 10
   }
 });

@@ -19,10 +19,10 @@ export default class HealthMeter extends Component{
   render(){
       return (
         <View >
-          <Text style={styles.welcome}>
+          <Text style={styles.health}>
             Health
           </Text>
-          <Text style={styles.welcome}>
+          <Text style={styles.healthmeter}>
             {this.state.health} / 100
           </Text>
         </View>
