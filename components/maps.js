@@ -13,8 +13,8 @@ export default class Maps extends Component {
       coordinate: new MapView.AnimatedRegion({
         latitude: props.myProp.coords.latitude,
         longitude: props.myProp.coords.longitude,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
+        latitudeDelta: 0.00922,
+        longitudeDelta: 0.00421,
       }),
       markers: [
         {
@@ -48,8 +48,8 @@ componentDidMount() {
         this.setState({coordinate: new MapView.AnimatedRegion({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          latitudeDelta: 0.00922,
+          longitudeDelta: 0.00421,
       })});
       },
       error => alert(JSON.stringify(error)),

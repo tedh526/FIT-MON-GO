@@ -16,6 +16,7 @@ export default class StatsPage extends Component {
     super(props);
     this.state = {
       avatarPic: 100,
+      avatarEvol: false,
       health: 100,
       alive: true,
       totalDistance: 0,
@@ -60,10 +61,11 @@ export default class StatsPage extends Component {
     this.healthCountdown();
     this.avatarUpdate();
     this.powerUp();
+    setTimeout(() => this.setState({avatarEvol: true}), 150000);
     navigator.geolocation.watchPosition.bind(this);
     navigator.geolocation.watchPosition(
       position => {
-        this.distanceTravel(position)
+        this.distanceTravel(position);
       },
       error => alert(JSON.stringify(error)),
       {enableHighAccuracy: true, distanceFilter: 1, timeout: 10000}
@@ -187,7 +189,7 @@ export default class StatsPage extends Component {
     };
     return (
       <View style={styles.container}>
-        <Avatar avatar={this.state.avatarPic}/>
+        <Avatar avatar={this.state.avatarPic} avatarEvol={this.state.avatarEvol}/>
         <HealthMeter health={this.state.health} alive={this.state.alive}/>
         <Text style={styles.welcome}> Health Gained By Walking: {this.state.healthGained} </Text>
         <Text style={styles.welcome}> Total Distance: {this.state.totalDistance.toFixed(3)} Miles</Text>
@@ -202,6 +204,9 @@ export default class StatsPage extends Component {
   }
 }
 
+//we need to make it look prettier
+//we need to make it evolve from a minion to a MING-ion
+//we need to prep the presentation (good introduction, app for people to maintain a healthy lifestyle, new years resolution)
 
 export const styles = StyleSheet.create({
   container: {
@@ -209,7 +214,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    marginTop: 15
+    marginTop: 20
   },
   welcome: {
     fontSize: 20,
