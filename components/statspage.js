@@ -27,12 +27,16 @@ export default class StatsPage extends Component {
       goodPlaces:
         [
           {
-            latitude: 40.705575,
+            //restaurant
+            latitude: 40.705574,
             longitude: -74.008390,
+            key: 1
           },
           {
-            latitude: 40.704544,
+            //gym
+            latitude: 40.704543,
             longitude: -74.008904,
+            key: 2
           },
           //honolulu
           {
@@ -61,7 +65,7 @@ export default class StatsPage extends Component {
         this.distanceTravel(position)
       },
       error => alert(JSON.stringify(error)),
-      {enableHighAccuracy: true, timeout: 20000}
+      {enableHighAccuracy: true, distanceFilter: 1, timeout: 10000}
     );
   }
 
@@ -146,7 +150,6 @@ export default class StatsPage extends Component {
   powerUp() {
     let checkLocations = function () {
     let position = this.state.lastPosition
-    console.log('aaaaaaaaaaaaa')
       let inAGoodPlace = false
       let avatarKey = 0
       this.state.goodPlaces.forEach(place => {
@@ -155,7 +158,7 @@ export default class StatsPage extends Component {
         let lat2 = position.coords.latitude
         let lon2 = position.coords.longitude
         let distanceFromPlace = this.distance(lat1, lon1, lat2, lon2)
-        if (distanceFromPlace < 0.0189){
+        if (distanceFromPlace < 0.00189){
           inAGoodPlace = true
           avatarKey = place.key
         }
