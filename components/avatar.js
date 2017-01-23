@@ -22,7 +22,7 @@ export default Avatar = (props) => {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Avatar
+          FIT-MON-GO
         </Text>
         <Image source={avatar[props.avatar]}/>
       </View>

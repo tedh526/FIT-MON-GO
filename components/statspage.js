@@ -189,7 +189,7 @@ export default class StatsPage extends Component {
       <View style={styles.container}>
         <Avatar avatar={this.state.avatarPic}/>
         <HealthMeter health={this.state.health} alive={this.state.alive}/>
-        <Text style={styles.welcome}> Health Gained: {this.state.healthGained} </Text>
+        <Text style={styles.welcome}> Health Gained By Walking: {this.state.healthGained} </Text>
         <Text style={styles.welcome}> Total Distance: {this.state.totalDistance.toFixed(3)} Miles</Text>
         <TouchableHighlight onPress={() => this._handleNextPress(mapRoute)}>
           <Image
@@ -203,22 +203,13 @@ export default class StatsPage extends Component {
 }
 
 
-{/*<View style={styles.container}>
-        <Avatar avatar={this.state.avatarPic}/>
-        <HealthMeter health={this.state.health} alive={this.state.alive}/>
-        <Text style={styles.welcome}> Health Gained: {this.state.healthGained} </Text>
-        <Text style={styles.welcome}> Total Distance: {this.state.totalDistance} </Text>
-      </View>*/}
-
-{/*<Maps position={this.state.lastPosition}/>*/}
-
-
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
+    marginTop: 15
   },
   welcome: {
     fontSize: 20,
@@ -231,6 +222,6 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
   },
   button: {
-    margin: 50
+    margin: 5
   }
 });
