@@ -61,7 +61,7 @@ export default class StatsPage extends Component {
     this.healthCountdown();
     this.avatarUpdate();
     this.powerUp();
-    setTimeout(() => this.setState({avatarEvol: true}), 150000);
+    setTimeout(() => this.setState({avatarEvol: true}), 150000000);
     navigator.geolocation.watchPosition.bind(this);
     navigator.geolocation.watchPosition(
       position => {
@@ -191,8 +191,8 @@ export default class StatsPage extends Component {
       <View style={styles.container}>
         <Avatar avatar={this.state.avatarPic} avatarEvol={this.state.avatarEvol}/>
         <HealthMeter health={this.state.health} alive={this.state.alive}/>
-        <Text style={styles.welcome}> Health Gained By Walking: {this.state.healthGained} </Text>
-        <Text style={styles.welcome}> Total Distance: {this.state.totalDistance.toFixed(3)} Miles</Text>
+        <Text style={styles.walkingdata}> Health Gained By Walking: {this.state.healthGained} </Text>
+        <Text style={styles.walkingdata}> Total Distance: {this.state.totalDistance.toFixed(3)} Miles</Text>
         <TouchableHighlight onPress={() => this._handleNextPress(mapRoute)}>
           <Image
             style = {styles.button}
@@ -220,17 +220,24 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    marginTop: 20
+  },
+  avatarname: {
+    fontSize: 35,
+    textAlign: 'center',
+  },
+  healthmeter: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  walkingdata: {
+    fontSize: 15,
+    textAlign: 'left',
   },
   button: {
     margin: 5

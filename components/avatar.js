@@ -8,6 +8,7 @@ import {styles} from './statspage.js';
 
 export default Avatar = (props) => {
   let avatar;
+  let avatarname;
   if (!props.avatarEvol) {
     avatar = {
       100: require('../images/minions/avatar_100.jpg'),
@@ -19,6 +20,7 @@ export default Avatar = (props) => {
       eating: require('../images/minions/avatar_eating.jpg'),
       workout: require('../images/minions/avatar_workout.jpg'),
     };
+    avatarname = 'Minion';
   } else {
     avatar = {
       100: require('../images/ming/avatar_100.jpg'),
@@ -30,16 +32,15 @@ export default Avatar = (props) => {
       eating: require('../images/ming/avatar_eating.jpg'),
       workout: require('../images/ming/avatar_workout.jpg'),
     };
+    avatarname = 'Ming-ion';
   }
-
-  console.log('this is all the stuff we neeeeeeddddd', avatar, props);
 
 
     // navigator.geolocation.getCurrentPosition((geolocation) => console.log('this is geolocation', geolocation));
     return (
       <View>
-        <Text style={styles.welcome}>
-          FIT-MON-GO
+        <Text style={styles.avatarname}>
+          {avatarname}
         </Text>
         <Image source={avatar[props.avatar]}/>
       </View>
