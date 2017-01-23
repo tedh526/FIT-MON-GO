@@ -1,36 +1,14 @@
 import React, {Component} from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   Image
 } from 'react-native';
 import MapView from 'react-native-maps';
 
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
-
 export default class Maps extends Component {
   constructor(props) {
     super(props);
-    console.log('this is props ********', props.myProp);
     this.state = {
       coordinate: new MapView.AnimatedRegion({
         latitude: props.myProp.coords.latitude,
@@ -63,16 +41,32 @@ export default class Maps extends Component {
     };
   }
 
-  // onRegionChange(region) {
-  //   this.state.region.setValue(region);
-  // }
+componentDidMount() {
+    navigator.geolocation.watchPosition.bind(this);
+    this.watchID = navigator.geolocation.watchPosition(
+      position => {
+        this.setState({coordinate: new MapView.AnimatedRegion({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+      })});
+      },
+      error => alert(JSON.stringify(error)),
+      {enableHighAccuracy: true, timeout: 20000}
+    );
+}
+
+componentWillUnmount() {
+  navigator.geolocation.clearWatch(this.watchID);
+}
 
   render() {
     return (
       <View style={{flex: 1}}>
         <MapView.Animated
           style={{flex: 1}}
-          initialRegion={this.state.coordinate}
+          region={this.state.coordinate}
         >
           <MapView.Marker.Animated coordinate={this.state.coordinate} image={require('../images/minions/mapicons/minion.jpg')}/>
           {this.state.markers.map(marker => (
@@ -90,18 +84,3 @@ export default class Maps extends Component {
   }
 
 }
-
-
-// export default Maps = (props) => {
-//   return (
-//     <View style={{flex: 1}}>
-//       <MapView.Animated style={{flex: 1}} initialRegion={{
-//                 latitude: 40.705255,
-//                 longitude: -74.009149,
-//                 latitudeDelta: 0.0922,
-//                 longitudeDelta: 0.0421,
-//               }}
-//       />
-//     </View>
-//   );
-// };
